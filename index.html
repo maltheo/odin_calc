@@ -3,10 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script href="js/scripts.js"></script>
+    <script src="js/scripts.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
     <title>Odin calculator</title>
 </head>
 <body>
-    
+    <div class="main-container">
+        <div id="calculator">
+            <div id="c_screen">
+                <p class="screen text"></p>
+            </div>
+            <div class="keypad">
+                <div class="button-row">
+                    <button class="btn c">C</button>
+                    <button class="btn para">()</button>
+                    <button class="btn percent">%</button>
+                    <button class="btn divide">/</button>
+                </div>
+                <div class="button-row">
+                    <button class="btn numeric 7">7</button>
+                    <button class="btn numeric 8">8</button>
+                    <button class="btn numeric 9">9</button>
+                    <button class="btn multi">*</button>
+                </div>
+                <div class="button-row">
+                    <button class="btn numeric 4">4</button>
+                    <button class="btn numeric 5">5</button>
+                    <button class="btn numeric 6">6</button>
+                    <button class="btn minus">-</button>
+                </div>
+                <div class="button-row">
+                    <button class="btn numeric 1">1</button>
+                    <button class="btn numeric 2">2</button>
+                    <button class="btn numeric 3">3</button>
+                    <button class="btn plus">+</button>
+                </div>
+                <div class="button-row">
+                    <button class="btn plusminus">+/-</button>
+                    <button class="btn numeric 0">0</button>
+                    <button class="btn dot">.</button>
+                    <button class="btn =">=</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let screen_text = document.querySelector(".screen.text");
+        let first_number = 0;
+        let second_number = 0;
+
+        function updateScreen(new_number) {
+            screen_text.textContent = String(new_number);
+        }
+
+        let btn_numeric = document.querySelectorAll(".btn.numeric");
+
+        updateScreen(first_number);
+    </script>
 </body>
 </html>
