@@ -17,7 +17,7 @@
 
 #c_screen {
     display: flex;
-    flex: 0 0 1;
+    /* flex: 0 0 1; */
     margin: 10px;
     height: 100px;
     width: auto;

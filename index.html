@@ -52,12 +52,24 @@
         let screen_text = document.querySelector(".screen.text");
         let first_number = 0;
         let second_number = 0;
+        let result;
+        let new_number;
 
         function updateScreen(new_number) {
             screen_text.textContent = String(new_number);
         }
 
         let btn_numeric = document.querySelectorAll(".btn.numeric");
+        for (let btn_idx = btn_numeric.length - 1; btn_idx >= 0; btn_idx--) {
+            btn_numeric[btn_idx].addEventListener("click", appendNumber)
+        }
+
+        function appendNumber(e) {
+            let btn_value = e.target.textContent;
+            new_number = screen_text.textContent + btn_value;
+            updateScreen(new_number);
+            // return Number(btn_value.textContent)
+        }
 
         updateScreen(first_number);
     </script>
