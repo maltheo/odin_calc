@@ -14,20 +14,22 @@
     width: 300px;
     background-color: #f4f5f7;
     border-radius: 10px;
-    outline-style: ridge;
-    outline-color: #304c7a;
+    outline-style: solid;
+    outline-width: 1px;
+    outline-color: grey;
 }
 
 #c_screen {
     display: flex;
     /* flex: 0 0 1; */
+    flex-direction: column;
     margin: 10px;
-    height: 100px;
+    height: 120px;
     width: auto;
     background-color: #f4f5f7;
     border-radius: 5px;
     outline-style: double;
-    outline-width: auto;
+    /* outline-width: auto; */
     outline-color: #c72138;
 }
 
@@ -49,11 +51,12 @@
     margin: 0 auto;
     height: 50px;
     width: 50px;
-    background-color: #e06236;
+    background-color: #304c7a;
     border-radius: 5px;
     justify-content: center;
     display: table-cell;
     vertical-align: middle;
+    color: grey;
 }
 
 .expanding {
@@ -66,10 +69,15 @@
 
 .screen.text {
     display: flex;
-    height: auto;
+    height: 40px;
     width: auto;
     flex-direction: column;
     justify-content: end;
     margin: 10px;
     margin-left: auto;
+}
+
+.c {
+    color: black;
+    background-color: #e06236;
 }
