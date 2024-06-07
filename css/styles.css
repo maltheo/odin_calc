@@ -4,6 +4,7 @@
     align-items: center;
     text-align: center;
     height: 100vh;
+    /* color: grey; */
 }
 
 #calculator {
@@ -11,8 +12,10 @@
     flex-direction: column;
     height: 450px;
     width: 300px;
-    background-color: darkslategrey;
+    background-color: #f4f5f7;
     border-radius: 10px;
+    outline-style: ridge;
+    outline-color: #304c7a;
 }
 
 #c_screen {
@@ -21,8 +24,11 @@
     margin: 10px;
     height: 100px;
     width: auto;
-    background-color: black;
+    background-color: #f4f5f7;
     border-radius: 5px;
+    outline-style: double;
+    outline-width: auto;
+    outline-color: #c72138;
 }
 
 .keypad {
@@ -43,16 +49,23 @@
     margin: 0 auto;
     height: 50px;
     width: 50px;
-    background-color: slategray;
-    border-radius: 50%;
+    background-color: #e06236;
+    border-radius: 5px;
     justify-content: center;
     display: table-cell;
     vertical-align: middle;
 }
 
+.expanding {
+    width: 120px;
+}
+
+.numeric {
+    background-color: #f4f5f7;
+}
+
 .screen.text {
     display: flex;
-    color: aliceblue;
     height: auto;
     width: auto;
     flex-direction: column;
