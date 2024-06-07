@@ -15,8 +15,8 @@
             </div>
             <div class="keypad">
                 <div class="button-row">
-                    <button class="btn c">C</button>
-                    <button class="btn para">()</button>
+                    <button class="btn c expanding">C</button>
+                    <!-- <button class="btn para">()</button> -->
                     <button class="btn percent">%</button>
                     <button class="btn divide">/</button>
                 </div>
@@ -50,20 +50,29 @@
 
     <script>
         let screen_text = document.querySelector(".screen.text");
-        let first_number = 0;
-        let second_number = 0;
+        let first_number;
+        let second_number;
         let result;
         let new_number;
 
+        // A function that will update the calculator screen, intended to be
+        // usable generically
         function updateScreen(new_number) {
-            screen_text.textContent = String(new_number);
+            screen_text.textContent = String(Number(new_number));
         }
 
+        // All numerical buttons' content will be used directly
         let btn_numeric = document.querySelectorAll(".btn.numeric");
         for (let btn_idx = btn_numeric.length - 1; btn_idx >= 0; btn_idx--) {
             btn_numeric[btn_idx].addEventListener("click", appendNumber)
         }
 
+        // Clear button, reverts screen to default value
+        let btn_clear = document.querySelector(".btn.c");
+        btn_clear.addEventListener("click", clearScreen);
+
+        // The approach currently is to append numerical values
+        // by reading the screen directly
         function appendNumber(e) {
             let btn_value = e.target.textContent;
             new_number = screen_text.textContent + btn_value;
@@ -71,7 +80,18 @@
             // return Number(btn_value.textContent)
         }
 
-        updateScreen(first_number);
+        function clearScreen() {
+            updateScreen(0);
+        }
+
+        let btn_add = document.querySelector(".btn.plus");
+        btn_add.addEventListener("click", addition);
+        function addition(e, ) {
+
+        }
+
+        // Initial value for calculator
+        clearScreen();
     </script>
 </body>
 </html>
