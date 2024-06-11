@@ -11,54 +11,64 @@
     <div class="main-container">
         <div id="calculator">
             <div id="c_screen">
-                <p class="screen text"></p>
+                <p class="screen text top">0</p>
+                <p class="screen text operator">1</p>
+                <p class="screen text bottom">2</p>
             </div>
             <div class="keypad">
                 <div class="button-row">
                     <button class="btn c expanding">C</button>
                     <!-- <button class="btn para">()</button> -->
                     <button class="btn percent">%</button>
-                    <button class="btn divide">/</button>
+                    <button class="btn op divide">/</button>
                 </div>
                 <div class="button-row">
                     <button class="btn numeric 7">7</button>
                     <button class="btn numeric 8">8</button>
                     <button class="btn numeric 9">9</button>
-                    <button class="btn multi">*</button>
+                    <button class="btn op multi">*</button>
                 </div>
                 <div class="button-row">
                     <button class="btn numeric 4">4</button>
                     <button class="btn numeric 5">5</button>
                     <button class="btn numeric 6">6</button>
-                    <button class="btn minus">-</button>
+                    <button class="btn op minus">-</button>
                 </div>
                 <div class="button-row">
                     <button class="btn numeric 1">1</button>
                     <button class="btn numeric 2">2</button>
                     <button class="btn numeric 3">3</button>
-                    <button class="btn plus">+</button>
+                    <button class="btn op plus">+</button>
                 </div>
                 <div class="button-row">
                     <button class="btn plusminus">+/-</button>
                     <button class="btn numeric 0">0</button>
                     <button class="btn dot">.</button>
-                    <button class="btn =">=</button>
+                    <button class="btn eq">=</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        let screen_text = document.querySelector(".screen.text");
+        let screen = document.querySelector("#c_screen");
         let first_number;
         let second_number;
         let result;
         let new_number;
+        let position = 2;
+        let op_switch = 0;
 
         // A function that will update the calculator screen, intended to be
         // usable generically
-        function updateScreen(new_number) {
-            screen_text.textContent = String(Number(new_number));
+        function updateScreen(new_number, position) {
+            if (position === 0 || position === 2) {
+                screen.children[position].textContent = 
+                new_number === "" ? "":
+                String(Number(new_number));
+            } else {
+                screen.children[position].textContent = String(new_number);
+            }
         }
 
         // All numerical buttons' content will be used directly
@@ -75,19 +85,77 @@
         // by reading the screen directly
         function appendNumber(e) {
             let btn_value = e.target.textContent;
-            new_number = screen_text.textContent + btn_value;
-            updateScreen(new_number);
+            new_number = screen.children[position].textContent + btn_value;
+            updateScreen(new_number, position);
             // return Number(btn_value.textContent)
         }
 
+        // Clear screen, or C, button functionality
         function clearScreen() {
-            updateScreen(0);
+            updateScreen("", 0); // top calculator row
+            updateScreen("", 1); // middle >> >>
+            updateScreen(0, 2); // bottom >> >>
+            screen.children[2].style.color = "";
         }
 
-        let btn_add = document.querySelector(".btn.plus");
-        btn_add.addEventListener("click", addition);
-        function addition(e, ) {
+        let btn_percent = document.querySelector(".btn.percent");
+        btn_percent.addEventListener("click", percentage);
+        function percentage(e) {
+            updateScreen(screen.children[2].textContent, 0);
+            updateScreen("%", 1);
+            updateScreen(String(Number(screen.children[2].textContent)/100), 2);
+            screen.children[2].style.color = "#c72138";
+        }
 
+        let btn_divide = document.querySelector(".btn.divide");
+        btn_divide.addEventListener("click", divide);
+        function divide(e) {
+            if (screen.children[0].textContent === "") {
+                updateScreen(screen.children[2].textContent, 0);
+                updateScreen("/", 1);
+                updateScreen("", 2);
+            } else {
+                first_number = Number(screen.children[0].textContent);
+                second_number = Number(screen.children[2].textContent);
+                result = first_number/second_number;
+                updateScreen(String(result), 0);
+                updateScreen("/", 1);
+                updateScreen("", 2);
+            }
+        }
+
+        let btn_multiply = document.querySelector(".btn.multi");
+        btn_multiply.addEventListener("click", multiply);
+        function multiply(e) {
+            if (screen.children[0].textContent === "") {
+                updateScreen(screen.children[2].textContent, 0);
+                updateScreen("*", 1);
+                updateScreen("", 2);
+            } else {
+                first_number = Number(screen.children[0].textContent);
+                second_number = Number(screen.children[2].textContent);
+                result = first_number*second_number;
+                updateScreen(String(result), 0);
+                updateScreen("*", 1);
+                updateScreen("", 2);
+            }
+        }
+
+        let btn_equals = document.querySelector(".eq");
+        btn_equals.addEventListener("click", equals);
+        function equals(e) {
+            if (screen.children[0].textContent === "") {
+                updateScreen(screen.children[2].textContent, 0);
+                updateScreen("/", 1);
+                updateScreen("", 2);
+            } else {
+                first_number = Number(screen.children[0].textContent);
+                second_number = Number(screen.children[2].textContent);
+                result = first_number/second_number;
+                updateScreen(String(result), 0);
+                updateScreen("/", 1);
+                updateScreen("", 2);
+            }
         }
 
         // Initial value for calculator
