@@ -60,6 +60,13 @@
     color: grey;
 }
 
+/* .btn.plusminus:focus {     
+    color: #d7a64b;
+    background-color: #f4f5f7;
+    outline-color: #d7a64b;
+    outline-style: double;
+} */
+
 .expanding {
     width: 120px;
 }
@@ -81,4 +88,16 @@
 .special {
     color: black;
     background-color: #e06236;
+}
+
+.plusminus {
+    background-color: #f4f5f7;
+    color: grey;
+    border-color: #e06236;
+    border-width: 2px;
+    font-weight: bold;
+}
+
+.toggle {
+    color: #e06236;
 }
