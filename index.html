@@ -19,7 +19,7 @@
                 <div class="button-row">
                     <button class="btn special c expanding">C</button>
                     <!-- <button class="btn para">()</button> -->
-                    <button class="btn op percent">%</button>
+                    <button class="btn percent">%</button>
                     <button class="btn op divide">/</button>
                 </div>
                 <div class="button-row">
@@ -99,11 +99,11 @@
 
         let btn_operator = document.querySelectorAll(".op");
         for (let btn_idx = btn_operator.length - 1; btn_idx >= 0; btn_idx--) {
-            btn_operator[btn_idx].addEventListener("click", sendOperation)
+            btn_operator[btn_idx].addEventListener("click", sendOperation);
         }
 
         const operations = {
-            "%": percentage,
+            // "%": percentage,
             "/": divide,
             "*": multiply,
             "-": minus,
@@ -112,11 +112,35 @@
 
         function sendOperation(e) {
             console.log(e.target.textContent);
-            console.log(operations[e.target.textContent])
+            console.log(operations[e.target.textContent]);
+            if (screen.children[0].textContent === "") {
+                updateScreen(screen.children[2].textContent, 0);
+                updateScreen(e.target.textContent, 1);
+                updateScreen("", 2);
+            } else if (screen.children[1].textContent !== e.target.textContent) {
+                updateScreen(e.target.textContent, 1);
+                updateScreen("", 2);
+            } else if (screen.children[2].textContent !== "") {
+                operate(e.target.textContent);
+            }
         }
 
+        function operate(operator) {
+            a = Number(screen.children[0].textContent);
+            b = Number(screen.children[2].textContent);
+            result = operations[operator](a, b);
+            updateScreen(String(result), 0);
+            updateScreen(operator, 1);
+            updateScreen("", 2);
+        }
+
+        let btn_percent = document.querySelector(".percent");
+        btn_percent.addEventListener("click", percentage);
         function percentage(a) {
-            return divide(a, 100);
+            if (screen.children[2].textContent !== "") {
+                a = Number(screen.children[2].textContent);
+                updateScreen(String(divide(a, 100)), 2);
+            }
         }
 
         function divide(a, b) {
@@ -138,17 +162,11 @@
         let btn_equals = document.querySelector(".eq");
         btn_equals.addEventListener("click", equals);
         function equals(e) {
-            if (screen.children[0].textContent === "") {
-                updateScreen(screen.children[2].textContent, 0);
-                updateScreen("/", 1);
-                updateScreen("", 2);
-            } else {
-                a = Number(screen.children[0].textContent);
-                b = Number(screen.children[2].textContent);
-                result = a/b;
-                updateScreen(String(result), 0);
-                updateScreen("/", 1);
-                updateScreen("", 2);
+            if (screen.children[0].textContent !== "" &
+                screen.children[1].textContent !== "" &
+                screen.children[2].textContent !== ""
+            ) {
+                operate(screen.children[1].textContent);
             }
         }
 
