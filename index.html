@@ -98,13 +98,13 @@
             const btn_value = e.target.textContent;
             switch (op_switch) {
                 case 1:
-                    updateScreen(btn_value, 2);
+                    updateScreen(sign*btn_value, 2);
                     op_switch = 0;
                     decimal_switch = 0;
                     break;
                 default:
                     result = screen.children[position].textContent + btn_value;
-                    updateScreen(result, position);
+                    updateScreen(sign*Math.abs(result), position);
             };
         }
 
@@ -219,7 +219,7 @@
             btn_plusminus.children[0].classList.toggle("toggle");
             btn_plusminus.children[2].classList.toggle("toggle");
             a = Number(screen.children[2].textContent);
-            updateScreen(String(multiply(a, -1)), 2);
+            updateScreen(String(multiply(a, sign)), 2);
         }
 
         // Initial value for calculator
