@@ -219,7 +219,8 @@
             btn_plusminus.children[0].classList.toggle("toggle");
             btn_plusminus.children[2].classList.toggle("toggle");
             a = Number(screen.children[2].textContent);
-            updateScreen(String(multiply(a, sign)), 2);
+            console.log(a);
+            updateScreen(String(-a), 2);
         }
 
         // Initial value for calculator
